@@ -1,0 +1,393 @@
+# Business Requirements Document - Admission Application Modernization
+
+**1. Introduction**
+
+*   **Purpose of the Document**: This document outlines the business requirements for the modernization of the existing admission application system (FE2025). It consolidates findings from architectural analysis, code review, and inferred business processes to provide a comprehensive understanding of the system's current functionality and future needs from a business perspective.
+*   **Scope of the Application**: The application is a comprehensive web-based platform designed to manage the end-to-end admission and counseling process for an educational institution. It covers candidate registration, application submission, document verification, multi-round counseling (CAP Rounds), fee management, communication, reporting, and various administrative functions.
+*   **Target Audience**: This document is intended for stakeholders involved in the modernization project, including business analysts, product owners, development teams (frontend, backend, QA), project managers, and system administrators.
+
+**2. High-Level Overview**
+
+The FE2025 application serves as a critical portal for managing student admissions. It facilitates a structured, multi-stage process, ensuring compliance with various academic and administrative regulations. The system interacts with multiple external services to streamline operations and enhance user experience.
+
+*   **Key User Roles and their Interactions**:
+    *   **Candidate**: The primary user, responsible for registration, application submission, document uploads, participation in counseling rounds, fee payments, and communication with support.
+    *   **Admin**: Oversees the entire system, manages configurations, master data, user accounts (for other roles), monitors application progress, generates reports, and handles global communications.
+    *   **AFC (Application Facilitation Center) Officer**: Assists candidates with application processes, performs initial document verification, and confirms applications.
+    *   **ARC (Admission Reporting Center) Officer**: Manages post-allotment processes, including seat acceptance confirmations and handling admission cancellations.
+    *   **Institute Officer**: Manages institute-specific data, course information, confirms admissions, and handles institute-level reporting.
+    *   **RO (Regional Officer)**: Provides regional oversight, potentially aggregating data and reports from multiple AFCs/ARCs/Institutes within their jurisdiction.
+    *   **MVSO (Merit List Verification Scrutiny Officer)**: A specialized role involved in the verification of merit list data, potentially reviewing discrepancies and recommending candidates.
+
+The application workflow typically starts with Candidate registration, progresses through various stages of application form filling and document submission, proceeds to counseling rounds, and culminates in admission confirmation at an institute. Each stage involves specific interactions between Candidates and administrative roles (AFC, ARC, Institute), all managed and monitored by the Admin.
+
+**3. Role-Wise Feature Breakdown**
+
+This section details the specific features and functionalities accessible to and utilized by each key user role within the application.
+
+**3.1. Candidate**
+*   **User Management & Authentication**: FR-UM-001 (Registration), FR-UM-002 (Login), FR-UM-003 (Password Management), FR-UM-004 (Profile Management).
+*   **Application Process**: FR-CAP-001 to FR-CAP-009 (Application Form Filling, Document Upload, Fee Payment, Review & Confirmation).
+*   **Document Management & Verification**: FR-DMV-001 (Document Upload), FR-DMV-003 (Discrepancy Resolution).
+*   **Counseling/Admission Process**: FR-CAPR-002 (Option Form Filling), FR-CAPR-003 (Allotment Status Display), FR-CAPR-004 (Seat Acceptance Process).
+*   **Fee Management**: FR-FM-001 (Application Fee Calculation), FR-FM-002 (Online Payment Processing).
+*   **Communication & Notifications**: FR-CN-001 (SMS), FR-CN-002 (Email), FR-CN-003 (WhatsApp), FR-CN-004 (Internal Messaging), FR-CN-005 (Announcements).
+*   **Grievance Management**: FR-GM-001 (Grievance Submission), FR-GM-002 (Grievance Tracking).
+
+**3.2. Admin**
+*   **User Management & Authentication**: FR-UM-002 (Login), FR-UM-003 (Password Management - Reset others), FR-UM-005 (User Action Logging).
+*   **Communication & Notifications**: FR-CN-001 (SMS - Send bulk), FR-CN-002 (Email - Send bulk), FR-CN-004 (Internal Messaging), FR-CN-005 (Announcement/News Management).
+*   **Reporting & Analytics**: FR-RA-001 (Pre-defined Reports), FR-RA-002 (Dynamic Report Generation), FR-RA-003 (Dashboards), FR-RA-004 (Data Export).
+*   **Grievance Management**: FR-GM-002 (Grievance Tracking), FR-GM-003 (Grievance Resolution - Open, Forward, Reply).
+*   **Master Data Management**: FR-MDM-001 (Configurable Master Data), FR-MDM-002 (Course & Institute Master Data), FR-MDM-003 (Activity Status & Important Dates), FR-MDM-004 (Project Configuration).
+*   **Institute Management**: FR-IM-001 (Institute Profile Management - Oversight).
+*   **ARA Module**: FR-ARA-003 (ARA Dashboards & Reports).
+*   **Merit List Verification**: FR-MV-003 (MV Dashboards & Reports).
+
+**3.3. AFC (Application Facilitation Center) Officer**
+*   **User Management & Authentication**: FR-UM-002 (Login), FR-UM-003 (Password Management), FR-UM-004 (Profile Management), FR-UM-005 (User Action Logging).
+*   **Document Management & Verification**: FR-DMV-002 (Document Verification), FR-DMV-003 (Discrepancy Management).
+*   **Communication & Notifications**: FR-CN-004 (Internal Messaging).
+
+**3.4. ARC (Admission Reporting Center) Officer**
+*   **User Management & Authentication**: FR-UM-002 (Login), FR-UM-003 (Password Management), FR-UM-004 (Profile Management), FR-UM-005 (User Action Logging).
+*   **Document Management & Verification**: FR-DMV-002 (Document Verification).
+*   **Counseling/Admission Process**: FR-CAPR-004 (Seat Acceptance Confirmation).
+*   **Communication & Notifications**: FR-CN-004 (Internal Messaging).
+
+**3.5. Institute Officer**
+*   **User Management & Authentication**: FR-UM-002 (Login), FR-UM-003 (Password Management), FR-UM-004 (Profile Management), FR-UM-005 (User Action Logging).
+*   **Counseling/Admission Process**: FR-CAPR-005 (Admission Confirmation/Cancellation).
+*   **Communication & Notifications**: FR-CN-004 (Internal Messaging).
+*   **Institute Management**: FR-IM-001 (Institute Profile Management), FR-IM-002 (Course & Intake Management), FR-IM-003 (Sub-Institute Management).
+*   **ARA Module**: FR-ARA-003 (ARA Dashboards & Reports).
+
+**3.6. RO (Regional Officer)**
+*   **User Management & Authentication**: FR-UM-002 (Login), FR-UM-003 (Password Management), FR-UM-005 (User Action Logging).
+*   **Communication & Notifications**: FR-CN-004 (Internal Messaging).
+*   **ARA Module**: FR-ARA-002 (Candidate Verification), FR-ARA-003 (ARA Dashboards & Reports).
+*   **Merit List Verification**: FR-MV-003 (MV Dashboards & Reports).
+
+**3.7. MVSO (Merit List Verification Scrutiny Officer)**
+*   **User Management & Authentication**: FR-UM-002 (Login), FR-UM-003 (Password Management), FR-UM-005 (User Action Logging).
+*   **Merit List Verification**: FR-MV-002 (Candidate Verification by SO).
+
+**4. Functional Requirements**
+
+**4.1. User Management & Authentication**
+(Moved from original 3.1)
+
+*   **FR-UM-001: User Registration**:
+    *   The system SHALL allow new candidates to register by providing personal details (Name, Father's Name, Mother's Name, Gender, DOB, Religion, Region, Mother Tongue, Annual Family Income, Aadhaar Number, Nationality, Contact Address, Mobile Number, Email ID).
+    *   The system SHALL support mobile number and email ID verification via OTP during registration.
+    *   The system SHALL allow candidates to set a password and security question/answer during registration.
+    *   The system SHALL check for duplicate registrations based on Mobile Number, HSC Seat No, JEE/CET Application No, and Email ID.
+    *   The system SHALL integrate with Keycloak SSO for centralized user management and authentication.
+*   **FR-UM-002: User Login**:
+    *   The system SHALL allow registered candidates, Admin, AFC, ARC, Institute, RO, and MVSO users to log in using their credentials.
+    *   The system SHALL support OTP verification for login, if configured.
+    *   The system SHALL redirect users to their respective dashboards/homepages upon successful login.
+*   **FR-UM-003: Password Management**:
+    *   The system SHALL provide functionality for users to reset forgotten passwords via security questions, OTP, or email verification.
+    *   The system SHALL allow users to change their passwords after logging in.
+    *   The system SHALL allow administrators to reset candidate passwords.
+*   **FR-UM-004: User Profile Management**:
+    *   The system SHALL allow users to view and update their personal information, contact details, and bank account details (if applicable).
+    *   The system SHALL allow candidates to update their mobile number after verification.
+    *   The system SHALL allow AFC/ARC/Institute users to update their respective profiles.
+*   **FR-UM-005: User Action Logging**:
+    *   The system SHALL log user actions (e.g., page access, button clicks) including User ID, IP Address, Page URL, and action performed.
+
+**4.2. Candidate Application Process**
+(Moved from original 3.2)
+
+*   **FR-CAP-001: Application Form Filling (Personal Details)**:
+    *   The system SHALL allow candidates to fill in their personal details, including demographic and contact information.
+    *   The system SHALL capture details like Aadhaar Number, and bank account information.
+*   **FR-CAP-002: Candidature Type Details**:
+    *   The system SHALL allow candidates to select their candidature type (e.g., Maharashtra State, All India, J&K, NRI, OCI, PIO, etc.).
+    *   The system SHALL allow candidates to specify Home University and Category details, including caste, EWS status, and provide details for Caste Validity Certificate (CVC), Non-Creamy Layer (NCL), and EWS certificates.
+*   **FR-CAP-003: Special Reservation Details**:
+    *   The system SHALL allow candidates to declare special reservation categories (e.g., Physically Handicapped, Defence, Orphan, TFWS, Linguistic Minority, Religious Minority).
+    *   The system SHALL capture relevant details and registration numbers for these reservations.
+*   **FR-CAP-004: Qualification Details (SSC/HSC/Diploma)**:
+    *   The system SHALL allow candidates to enter their SSC, HSC, and/or Diploma examination details, including board, passing year, seat number, subject-wise marks, and percentages.
+    *   The system SHALL support fetching HSC results from an external API or database, if configured.
+*   **FR-CAP-005: Entrance Examination Details (JEE/CET/NEET)**:
+    *   The system SHALL allow candidates to enter their JEE, CET, and/or NEET examination details, including roll number, subject-wise scores, and total scores.
+    *   The system SHALL perform checks against external JEE/CET/NEET results, if configured.
+*   **FR-CAP-006: Document Upload**:
+    *   The system SHALL allow candidates to upload all required supporting documents (e.g., mark sheets, caste certificates, income certificates, reservation proofs) in specified formats (e.g., PDF, JPG, PNG).
+    *   The system SHALL provide a clear list of required documents based on the candidate's profile and selected categories.
+    *   The system SHALL allow candidates to view their uploaded documents.
+*   **FR-CAP-007: Application Fee Payment**:
+    *   The system SHALL calculate the applicable application fee based on the candidate's candidature type and category.
+    *   The system SHALL integrate with various payment gateways (Razorpay, SBI, CCAvenue) to process online fee payments.
+    *   The system SHALL record payment transaction details and reconciliation status.
+*   **FR-CAP-008: Application Review & Confirmation**:
+    *   The system SHALL allow candidates to review their entire application form before final submission.
+    *   The system SHALL require OTP verification for final application confirmation.
+    *   The system SHALL allow candidates to unlock and edit their application form if it meets specific criteria.
+*   **FR-CAP-009: Application Acknowledgment**:
+    *   The system SHALL generate and provide an acknowledgment receipt upon successful application submission.
+    *   The system SHALL allow candidates to print their application form and acknowledgment.
+
+**4.3. Document Management & Verification**
+(Moved from original 3.3)
+
+*   **FR-DMV-001: Document Upload**:
+    *   The system SHALL allow candidates to upload all required supporting documents (e.g., academic certificates, caste certificates, income certificates, reservation proofs) in specified formats (e.g., PDF, JPG, PNG).
+    *   The system SHALL provide a clear list of required documents based on the candidate's profile and selected categories.
+    *   The system SHALL allow candidates to view their uploaded documents.
+*   **FR-DMV-002: Document Verification by AFC/ARC**:
+    *   The system SHALL allow AFC officers to review uploaded candidate documents and application details.
+    *   The system SHALL allow AFC officers to mark documents as verified, or raise discrepancies.
+    *   The system SHALL allow ARC officers to verify documents related to seat acceptance and admission.
+    *   The system SHALL track the verification status of each document and the overall application.
+*   **FR-DMV-003: Discrepancy Management**:
+    *   The system SHALL allow AFC/ARC officers to record specific discrepancies found in documents or application data.
+    *   The system SHALL notify candidates about raised discrepancies.
+    *   The system SHALL allow candidates to re-submit corrected documents or provide clarifications for discrepancies.
+    *   The system SHALL track the resolution status of discrepancies.
+*   **FR-DMV-004: E-Verification Integration**:
+    *   The system SHALL integrate with external e-verification systems (e.g., MAHA IT API) to automatically verify certain candidate details or documents.
+    *   The system SHALL update candidate profiles and document statuses based on e-verification results.
+
+**4.4. Counseling/Admission Process (CAP Rounds)**
+(Moved from original 3.4)
+
+*   **FR-CAPR-001: Master Data for CAP Rounds**:
+    *   The system SHALL maintain master data for universities, courses, and choice codes for each CAP Round.
+    *   The system SHALL provide distinct course status flags (e.g., CourseStatus1, CourseStatus2, CourseStatus3) relevant to different CAP Rounds.
+*   **FR-CAPR-002: Option Form Filling**:
+    *   The system SHALL allow eligible candidates to fill and submit option forms for each CAP Round.
+    *   The system SHALL display available institutes and courses based on candidate eligibility and selected filters (e.g., university, district, course status, TFWS status).
+    *   The system SHALL allow candidates to shortlist and prioritize their preferred options (choice codes).
+    *   The system SHALL validate the entered choice codes.
+    *   The system SHALL support importing options from previous CAP Rounds.
+    *   The system SHALL require OTP verification for option form confirmation.
+*   **FR-CAPR-003: Allotment Status Display**:
+    *   The system SHALL display provisional and final allotment statuses for candidates for each CAP Round.
+    *   The system SHALL provide access to master allotment lists for each CAP Round.
+*   **FR-CAPR-004: Seat Acceptance Process**:
+    *   The system SHALL guide candidates through the seat acceptance process post-allotment.
+    *   The system SHALL allow candidates to pay the seat acceptance fee.
+    *   The system SHALL support confirmation of seat acceptance, potentially involving ARC verification.
+    *   The system SHALL allow candidates to indicate willingness for betterment or freeze their allotted seat.
+*   **FR-CAPR-005: Admission Confirmation at Institute**:
+    *   The system SHALL allow Institute officers to confirm a candidate's admission based on seat acceptance and physical reporting.
+    *   The system SHALL allow Institute officers to update document submission status during admission.
+    *   The system SHALL support cancellation of admission by Institutes, with reasons and cancellation charges.
+*   **FR-CAPR-006: J&K Counseling**:
+    *   The system SHALL support a separate counseling process for J&K candidates, including merit list generation and seat offering.
+    *   The system SHALL allow administrators/officers to offer seats and manage offered seat details for J&K candidates.
+
+**4.5. Fee Management**
+(Moved from original 3.5)
+
+*   **FR-FM-001: Application Fee Calculation**:
+    *   The system SHALL automatically calculate the application fee based on the candidate's candidature type, category, and other relevant criteria.
+*   **FR-FM-002: Online Payment Processing**:
+    *   The system SHALL integrate with multiple payment gateways (Razorpay, SBI, CCAvenue, Easebuzz) to facilitate secure online payments for application fees, seat acceptance fees, and other charges.
+    *   The system SHALL capture all relevant transaction details, including reference numbers, payment gateway IDs, and payment status.
+*   **FR-FM-003: Payment Reconciliation**:
+    *   The system SHALL support reconciliation of payments received through various gateways, updating payment statuses (e.g., `IsValid`, `IsReconciled`).
+*   **FR-FM-004: Refund Management**:
+    *   The system SHALL manage refund processes, capturing refund amounts, statuses, and reasons for cancellation.
+*   **FR-FM-005: Admission Approval Fees (ARA Module)**:
+    *   The system SHALL manage the calculation and payment of admission approval fees by institutes.
+
+**4.6. Communication & Notifications**
+(Moved from original 3.6)
+
+*   **FR-CN-001: SMS Notifications**:
+    *   The system SHALL send automated SMS notifications for critical events (e.g., registration confirmation, OTP delivery, application status updates, allotment status, fee payment confirmations, discrepancy alerts).
+    *   The system SHALL support sending bulk SMS to candidates or specific groups.
+    *   The system SHALL use configurable SMS templates.
+*   **FR-CN-002: Email Notifications**:
+    *   The system SHALL send automated email notifications for critical events (e.g., registration confirmation, OTP delivery, application status updates, allotment status, fee payment confirmations, discrepancy alerts).
+    *   The system SHALL support sending bulk emails to candidates or specific groups.
+    *   The system SHALL use configurable email templates.
+*   **FR-CN-003: WhatsApp Notifications**:
+    *   The system SHALL send automated WhatsApp messages for critical events, if configured.
+*   **FR-CN-004: Internal Messaging System**:
+    *   The system SHALL provide an internal messaging system allowing communication between Admin, AFC, ARC, Institute, and Candidate roles.
+    *   The system SHALL allow users to send and reply to messages, and attach files.
+    *   The system SHALL categorize messages (e.g., non-replied, replied, sent, starred).
+*   **FR-CN-005: Announcement/News Management**:
+    *   The system SHALL allow administrators to publish important announcements and news updates visible to relevant user groups.
+
+**4.7. Reporting & Analytics**
+(Moved from original 3.7)
+
+*   **FR-RA-001: Pre-defined Reports**:
+    *   The system SHALL generate a variety of pre-defined reports covering all aspects of the admission process, including:
+        *   Candidate registration statistics (region-wise, category-wise, gender-wise, etc.).
+        *   Application status reports (confirmed, provisionally confirmed, cancelled).
+        *   Document verification status reports.
+        *   Fee collection reports.
+        *   Counseling round allotment reports.
+        *   Admission confirmation reports.
+        *   Merit list reports (provisional and final).
+        *   Communication logs (SMS, Email).
+        *   Login activity reports.
+*   **FR-RA-002: Dynamic Report Generation**:
+    *   The system SHALL provide a facility for authorized users (e.g., Admin) to define and generate custom reports by selecting tables/views and columns.
+    *   The system SHALL allow filtering and querying of data for custom reports.
+*   **FR-RA-003: Dashboards**:
+    *   The system SHALL provide role-specific dashboards (Admin, AFC, ARC, Institute) displaying key metrics and summaries relevant to their roles.
+*   **FR-RA-004: Data Export**:
+    *   The system SHALL allow exporting report data in common formats (e.g., Excel, PDF).
+
+**4.8. Grievance Management**
+(Moved from original 3.8)
+
+*   **FR-GM-001: Grievance Submission**:
+    *   The system SHALL allow candidates to submit grievances, specifying a category and providing details, including file attachments.
+*   **FR-GM-002: Grievance Tracking**:
+    *   The system SHALL allow candidates to check the status of their submitted grievances.
+    *   The system SHALL provide a dashboard for administrators/relevant officers to view, track, and manage grievances (pending, in-process, replied, approved, rejected).
+*   **FR-GM-003: Grievance Resolution**:
+    *   The system SHALL allow authorized officers to open, forward, and reply to grievances.
+    *   The system SHALL allow candidates to re-open grievances if not satisfied with the resolution.
+
+**4.9. Master Data Management**
+(Moved from original 3.9)
+
+*   **FR-MDM-001: Configurable Master Data**:
+    *   The system SHALL allow administrators to manage various master data lists (e.g., security questions, gender, religion, mother tongue, annual family income, nationality, states, districts, talukas, villages, candidature types, document types, boards, banks, languages).
+*   **FR-MDM-002: Course & Institute Master Data**:
+    *   The system SHALL allow administrators to manage institute profiles, course information, and choice codes.
+    *   The system SHALL support bulk import/update/delete of choice codes from external sources (e.g., DTE Portal).
+*   **FR-MDM-003: Activity Status & Important Dates**:
+    *   The system SHALL allow administrators to define and control application activity statuses (e.g., Application Form Filling, Document Verification, Option Form Filling) including start and end dates/times.
+    *   The system SHALL allow administrators to manage important dates and announcements for public display.
+*   **FR-MDM-004: Project Configuration**:
+    *   The system SHALL allow administrators to configure various project-wide settings and flags (e.g., duplicate checks, OTP requirements, captcha, document upload requirements, current CAP round, email/SMS/WhatsApp sending).
+
+**4.10. Institute Management**
+(Moved from original 3.10)
+
+*   **FR-IM-001: Institute Profile Management**:
+    *   The system SHALL allow Institute officers to view and update their institute's profile details.
+*   **FR-IM-002: Course & Intake Management**:
+    *   The system SHALL allow Institute officers to view and manage course information, total intake, and intake for various reservation categories for their institute.
+    *   The system SHALL allow Institute officers to update hostel capacity details.
+*   **FR-IM-003: Sub-Institute Management**:
+    *   The system SHALL support the creation and management of sub-institute user accounts.
+
+**4.11. ARA Module (Admission Approval)**
+(Moved from original 3.11)
+
+*   **FR-ARA-001: Admission Approval Fee Management**:
+    *   The system SHALL manage the calculation and payment of admission approval fees by institutes.
+*   **FR-ARA-002: Candidate Verification for RO/ARA**:
+    *   The system SHALL provide functionalities for RO and ARA (Admission Regulatory Authority) roles to verify admitted candidates' documents and data.
+*   **FR-ARA-003: ARA Dashboards & Reports**:
+    *   The system SHALL provide dashboards and reports specific to ARA operations, including fee collection reports and candidate verification statuses.
+
+**4.12. Merit List Verification (MV Module)**
+(Moved from original 3.12)
+
+*   **FR-MV-001: SO (Scrutiny Officer) Management**:
+    *   The system SHALL allow the creation and management of Scrutiny Officer accounts, including mapping them to specific institutes.
+*   **FR-MV-002: Candidate Verification by SO**:
+    *   The system SHALL allow Scrutiny Officers to verify candidate details and documents as part of the merit list verification process.
+    *   The system SHALL allow SOs to mark discrepancies and recommend/not recommend candidates.
+*   **FR-MV-003: MV Dashboards & Reports**:
+    *   The system SHALL provide dashboards and reports for RO and DTE (Directorate of Technical Education) roles related to merit list verification status and SO performance.
+
+**5. Non-Functional Requirements**
+(Moved from original 4)
+
+*   **NFR-PERF-001: Performance**:
+    *   The system SHALL respond to user requests within acceptable timeframes, even during peak load periods (e.g., during application submission deadlines, option form filling, or result announcements).
+    *   Page load times SHALL be optimized for quick rendering.
+    *   Database queries SHALL be optimized for efficient data retrieval and updates.
+    *   Specific performance targets (e.g., response time under 3 seconds for 90% of requests) will be defined during detailed design.
+*   **NFR-SEC-001: Security**:
+    *   The system SHALL enforce strong authentication and authorization mechanisms (via Keycloak SSO integration).
+    *   All sensitive data (e.g., passwords, personal identification numbers, financial information) SHALL be encrypted both in transit (HTTPS) and at rest (database encryption, if applicable).
+    *   The system SHALL be protected against common web vulnerabilities, including but not limited to SQL Injection, Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and Broken Access Control.
+    *   Input validation and sanitization SHALL be rigorously applied to all user inputs.
+    *   Access to administrative functions and sensitive data SHALL be restricted based on user roles and privileges.
+    *   The system SHALL log security-related events for auditing and incident response.
+    *   The Content Security Policy (CSP) SHALL be hardened to mitigate XSS risks by whitelisting trusted content sources.
+*   **NFR-SCAL-001: Scalability**:
+    *   The system SHALL be able to handle a large number of concurrent users (e.g., thousands of candidates applying simultaneously).
+    *   The architecture SHALL support horizontal scaling of application servers and database resources to accommodate increased load.
+    *   The document storage (Azure Blob Storage) SHALL be scalable to handle a large volume of uploaded documents.
+*   **NFR-USAB-001: Usability/User Experience**:
+    *   The user interface SHALL be intuitive, easy to navigate, and consistent across all modules.
+    *   The system SHALL provide clear and concise instructions, error messages, and feedback to users.
+    *   The system SHALL be accessible to users with disabilities, adhering to relevant accessibility standards (e.g., WCAG 2.1 AA).
+    *   The system SHALL be responsive and provide a consistent experience across various devices (desktop, tablet, mobile).
+*   **NFR-MAINT-001: Maintainability**:
+    *   The code base SHALL be modular, well-documented, and adhere to established coding standards and best practices.
+    *   The system SHALL be designed for ease of maintenance, bug fixing, and future enhancements.
+    *   Configuration settings (e.g., application dates, feature flags) SHALL be easily manageable without requiring code changes.
+*   **NFR-COMP-001: Compatibility**:
+    *   The system SHALL be compatible with major modern web browsers (e.g., Chrome, Firefox, Edge, Safari).
+    *   The system SHALL function correctly across different operating systems.
+*   **NFR-AVAIL-001: Availability/Reliability**:
+    *   The system SHALL have a high uptime percentage (e.g., 99.9% excluding planned maintenance).
+    *   The system SHALL implement disaster recovery mechanisms to ensure data integrity and business continuity.
+    *   Regular backups of the database and uploaded documents SHALL be performed.
+*   **NFR-DATA-001: Data Integrity**:
+    *   The system SHALL ensure the accuracy, consistency, and reliability of all data.
+    *   Data validation rules SHALL be enforced at the point of entry and during processing to prevent invalid data from entering the system.
+    *   Referential integrity SHALL be maintained across related data entities.
+
+**6. External System Integrations**
+(Moved from original 5)
+
+*   **ER-SSO-001: Single Sign-On (Keycloak)**:
+    *   **Purpose**: Centralized user authentication and authorization, providing a secure and streamlined login experience.
+    *   **Data Exchange**: OpenID Connect protocol, exchanging user identity (ID tokens) and access tokens. Candidate profile data is synchronized or retrieved during the authentication process.
+    *   **Key Data Points**: User ID, email, profile information (name, gender, DOB, phone number, address details, etc.).
+    *   **Configuration**: Requires `keycloakURL`, `SSOClientId`, `SSOClientSecret`, `RedirectUri`, `PostLogoutRedirectUri`.
+*   **ER-AZURE-001: Azure Blob Storage**:
+    *   **Purpose**: Secure and scalable storage for all uploaded documents (e.g., candidate certificates, images) and potentially generated reports.
+    *   **Data Exchange**: Binary data (files) for upload and download.
+    *   **Key Data Points**: File content, file paths/URLs, metadata (DocumentID, DocumentName).
+    *   **Configuration**: Requires `StorageConnectionString`, `StorageBaseURL`, `BlobContainerName`.
+*   **ER-PG-001: Payment Gateways (Razorpay, SBI, CCAvenue)**:
+    *   **Purpose**: Facilitate secure online payment processing for application fees, seat acceptance fees, and other charges.
+    *   **Data Exchange**: Transaction requests (amount, order ID, candidate details) are sent to the gateway. Payment status, transaction ID, and other relevant details are received back.
+    *   **Key Data Points**: Fee Amount, Reference Number, Application Form Number, Payment Mode, Bank Reference Number, Transaction Date, Order Status.
+    *   **Configuration**: Requires specific API keys, merchant IDs, secrets, and URLs for each integrated gateway.
+*   **ER-SMS-001: SMS Service (MSG91)**:
+    *   **Purpose**: Send automated SMS notifications and OTPs for various events (e.g., registration, password reset, application updates).
+    *   **Data Exchange**: API calls with recipient mobile number, message content, and sender ID.
+    *   **Key Data Points**: Mobile number, OTP code, message text.
+    *   **Configuration**: Requires `SMSSenderID`, `SMSSecureKey`, `SMSOTPUrl`, `SMSNormalUrl`, `BulkSMSAPIURL`.
+*   **ER-EMAIL-001: Email Service (SendGrid / MSG91)**:
+    *   **Purpose**: Send automated email notifications and verifications.
+    *   **Data Exchange**: API calls with recipient email address, subject, and email body.
+    *   **Key Data Points**: Email address, verification codes, notification content.
+    *   **Configuration**: Requires API keys, sender email addresses, and names for each service.
+*   **ER-WHATSAPP-001: WhatsApp Service (MSG91 / TATA)**:
+    *   **Purpose**: Send automated WhatsApp messages for notifications.
+    *   **Data Exchange**: API calls with recipient WhatsApp number and message content.
+    *   **Key Data Points**: Mobile number (WhatsApp), message text.
+    *   **Configuration**: Requires base URLs, authorization keys, and integrated numbers.
+*   **ER-MAHAIT-001: MAHA IT Document Fetch API**:
+    *   **Purpose**: Integrate with an external system to fetch specific candidate documents or data for e-verification.
+    *   **Data Exchange**: API requests with candidate identifiers and document IDs; receives structured data or document links.
+    *   **Key Data Points**: PersonalID, DocumentID, Barcode, ApplicantName, Caste, DistrictName, CertificateDate, etc.
+    *   **Configuration**: Specific API endpoints and authentication details.
+*   **ER-FCR-001: FCR System**:
+    *   **Purpose**: Integration with an external system related to First Come First Served (FCR) processes, possibly for data synchronization.
+    *   **Data Exchange**: Candidate application details (FCRApplicationID, FCRCandidateName, etc.) are exchanged.
+    *   **Configuration**: Requires `FCRBaseURL`.
+*   **ER-RESULT-001: External Result APIs (HSC/JEE/NEET)**:
+    *   **Purpose**: Fetching academic results (HSC, JEE, NEET) directly from external examination boards or their authorized data providers.
+    *   **Data Exchange**: API requests with candidate identifiers (roll number, seat number, DOB); receives examination scores and details.
+    *   **Key Data Points**: Roll number, scores (Physics, Chemistry, Math, Biology), total marks, passing year, candidate name.
+    *   **Configuration**: Specific API endpoints and authentication details, configurable via `HSCMarksFetchBy` flag.
+
+---
+
+**Conclusion**
+
+This Business Requirements Document provides a comprehensive overview of the existing admission application system, detailing its functional and non-functional requirements, and its various external integrations. This document serves as a foundational resource for the modernization effort, enabling a clear understanding of the system's capabilities and guiding the development of a more robust, efficient, and user-friendly platform. It is recommended to further refine these requirements through detailed discussions with stakeholders, prototyping, and user feedback sessions to ensure alignment with the modernization goals.

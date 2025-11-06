@@ -1,0 +1,70 @@
+.otp-container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.otp-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.otp-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-info {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.info-item {
+  margin-bottom: 8px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.app-id {
+  color: #0e3f8a;
+  font-weight: 600;
+}
+
+.otp-input-section {
+  margin-bottom: 24px;
+}
+
+.otp-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.otp-input {
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 8px;
+}
+
+.otp-actions {
+  margin-bottom: 20px;
+}
+
+.resend-section {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.otp-footer {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.note {
+  font-size: 12px;
+}
